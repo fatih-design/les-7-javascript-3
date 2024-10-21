@@ -8,12 +8,12 @@
 // getEmailDomain("n.eeken@novi-education.nl") geeft novi-education.nl
 // getEmailDomain("t.mellink@novi.nl") geeft novi.nl
 // getEmailDomain("a.wiersma@outlook.com") geeft outlook.com
-function email(email){
+function getEmailDomain(email){
     return email.split("@")[1];
 }
-console.log(email("n.eeken@novi-education.nl"));
-console.log(email("t.mellink@novi.nl"));
-console.log(email("a.wiersma@outlook.com"));
+console.log(getEmailDomain("n.eeken@novi-education.nl"));
+console.log(getEmailDomain("t.mellink@novi.nl"));
+console.log(getEmailDomain("a.wiersma@outlook.com"));
 
 
 
@@ -27,12 +27,12 @@ console.log(email("a.wiersma@outlook.com"));
 
  function typeOfEmail(a){
     let emailType = a.split("@")[1];
-    if(emailType == 'novi-education.nl')
-    return emailType + ' student';
-    if(emailType == 'novi.nl')
-    return emailType + ' mederwerker';
-    if (emailType == 'outlook.com')
-    return emailType +' extern';
+    if(emailType === 'novi-education.nl')
+    return 'student';
+    if(emailType === 'novi.nl')
+    return 'mederwerker';
+    if (emailType === 'outlook.com')
+    return 'extern';
 
 }
 console.log(typeOfEmail('n.eeken@novi-education.nl'));
@@ -52,16 +52,29 @@ console.log(typeOfEmail('a.wiersma@outlook.com'));
 // checkEmailValidity("n.eekenanovi.nl") geeft false - want geen @
 // checkEmailValidity("n.eeken@novinl.") geeft false - want de punt mag niet als laatst
 // checkEmailValidity("tessmellink@novi,nl") geeft false - want er staat een komma in
-function emailCheck(email){
-    let a = email.split("@")[1];
-    let b = a.includes(",");
-    let c = a.slice(-1).includes(".");
-    if(a === true && b === false && c === false){
-        return a[0][1];
+
+const emails =[
+    "n.eeken@novi.nl",
+    "tessmellink@novi.nl",
+    "n.eekenanovi.nl",
+    "n.eeken@novinl.",
+    "tessmellink@novi,nl"
+];
+for(const email of emails){
+   checkEmailValidity(email);
+   console.log(checkEmailValidity(email));
+}
+
+function checkEmailValidity(email){
+    let a = email.includes('@');
+    let b = email.includes(",");
+    let c = email.trim().charAt(email.length-1).includes(".");
+    if( a=== true && b === false && c === false){
+        return true;
     } else {
-        return a + b + c;
+        return false;
     }
 
 
 }
-console.log(emailCheck('n.eeken@novi.nl'));
+// console.log(checkEmailValidity('n.eeken@novi.nl'));
